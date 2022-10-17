@@ -46,11 +46,11 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentResponsePage);
     }
 
-/*    @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> update(@RequestBody @Validated DepartmentRequest departmentRequest, @PathVariable("id") Long id) {
         departmentService.update(departmentRequest, id);
         return ResponseEntity.ok().build();
-    }*/
+    }
 
     // ------------------------------------------------------------------------------------------------------------- //
 

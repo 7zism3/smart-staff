@@ -49,11 +49,11 @@ public class DepartmentService {
         return new PageImpl<>(departmentResponseMapper.toDto(entities), pageable, entityPage.getTotalElements());
     }
 
-/*    public DepartmentResponse update(DepartmentRequest departmentRequest, Long id) {
-        DepartmentResponse data = findById(id);
+    public DepartmentResponse update(DepartmentRequest departmentRequest, Long id) {
+        Department data = repository.findById(id).get();
         BeanUtils.copyProperties(departmentRequest, data);
-        return save(data);
-    }*/
+        return departmentResponseMapper.toDto(repository.save(data));
+    }
 
     // ------------------------------------------------------------------------------------------------------------- //
 
