@@ -24,6 +24,7 @@ public class DepartmentController {
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Validated DepartmentRequest departmentRequest) {
         departmentService.save(departmentRequest);
+
         return ResponseEntity.ok().build();
     }
 
