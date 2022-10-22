@@ -7,11 +7,13 @@ import com.nvt.smartstaff.entity.Department;
 import com.nvt.smartstaff.mapper.DepartmentRequestMapper;
 import com.nvt.smartstaff.mapper.DepartmentResponseMapper;
 import com.nvt.smartstaff.reponsitory.DepartmentRepository;
+import com.nvt.smartstaff.utils.BeanUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -44,14 +46,29 @@ public class DepartmentService {
 
     public Page<DepartmentResponse> findByCondition(DepartmentRequest departmentRequest, Pageable pageable) {
         Department department = departmentRequestMapper.toEntity(departmentRequest);
+        //List<Department> entities2 = repository.findAllByName("test_3452273aee7b", pageable);
+        Page<Department> entityPage = repository.findAll(pageable);
+        Slice<Department> entityPage3 = repository.findAllByName("test_3452273aee7b", pageable);
+        List<Department> entities = entityPage.getContent();
+        PageImpl temp = new PageImpl<>(departmentResponseMapper.toDto(entities), pageable, entityPage.getTotalElements());
+        return temp;
+    }
+
+    public List<DepartmentResponse> findAllPage(Pageable pageable) {
         Page<Department> entityPage = repository.findAll(pageable);
         List<Department> entities = entityPage.getContent();
-        return new PageImpl<>(departmentResponseMapper.toDto(entities), pageable, entityPage.getTotalElements());
+        return departmentResponseMapper.toDto(entities);
     }
 
     public DepartmentResponse update(DepartmentRequest departmentRequest, Long id) {
         Department data = repository.findById(id).get();
         BeanUtils.copyProperties(departmentRequest, data);
+        return departmentResponseMapper.toDto(repository.save(data));
+    }
+
+    public DepartmentResponse updatePatch(DepartmentRequest departmentRequest, Long id) {
+        Department data = repository.findById(id).get();
+        BeanUtils.copyProperties(departmentRequest, data, BeanUtil.getNullPropertyNames(departmentRequest));
         return departmentResponseMapper.toDto(repository.save(data));
     }
 

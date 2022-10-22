@@ -1,0 +1,7 @@
+${AnsiColor.BLUE}_____   _____    __________       ${AnsiColor.WHITE}_____________         ________________
+${AnsiColor.BLUE}___  | / /__ |  / /___  __/       ${AnsiColor.WHITE}__  ___/__  /_______ ____  __/___  __/
+${AnsiColor.BLUE}__   |/ / __ | / / __  /          ${AnsiColor.WHITE}_____ \ _  __/_  __ `/__  /_  __  /_
+${AnsiColor.BLUE}_  /|  /  __ |/ /  _  /           ${AnsiColor.WHITE}____/ / / /_  / /_/ / _  __/  _  __/
+${AnsiColor.BLUE}/_/ |_/   _____/   /_/            ${AnsiColor.WHITE}/____/  \__/  \__,_/  /_/     /_/
+    ${AnsiColor.BRIGHT_GREEN}:: Trọng Thuỷ ::                   ${AnsiColor.BRIGHT_MAGENTA}:: ${application.title}Smart Staff ::      ${AnsiColor.WHITE}(v0.0.1)
+                                    ${AnsiColor.BRIGHT_GREEN}:: Spring Boot ::     ${AnsiColor.WHITE}${spring-boot.formatted-version}

@@ -41,8 +41,15 @@ public class DepartmentController {
     }
 
     @GetMapping("/page-query")
-    public ResponseEntity<Page<DepartmentResponse>> pageQuery(DepartmentRequest departmentRequest, @PageableDefault(sort = "createAt", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Page<DepartmentResponse>> pageQuery(DepartmentRequest departmentRequest, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<DepartmentResponse> departmentResponsePage = departmentService.findByCondition(departmentRequest, pageable);
+        return ResponseEntity.ok(departmentResponsePage);
+    }
+
+    @GetMapping("/find-all-page")
+    public ResponseEntity<List<DepartmentResponse>> findAllPage(@PageableDefault(sort = "id",
+            direction = Sort.Direction.DESC) Pageable pageable) {
+        List<DepartmentResponse> departmentResponsePage = departmentService.findAllPage(pageable);
         return ResponseEntity.ok(departmentResponsePage);
     }
 
@@ -52,6 +59,11 @@ public class DepartmentController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/update2/{id}")
+    public ResponseEntity<Void> updatePatch(@RequestBody @Validated DepartmentRequest departmentRequest, @PathVariable("id") Long id) {
+        departmentService.updatePatch(departmentRequest, id);
+        return ResponseEntity.ok().build();
+    }
     // ------------------------------------------------------------------------------------------------------------- //
 
     @GetMapping("")

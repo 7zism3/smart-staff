@@ -10,8 +10,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-public class DepartmentResponse implements Serializable {
-
+public class EmployeeResponse implements Serializable {
     private String name;
-
+    private Integer age;
 }
