@@ -16,9 +16,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @AllArgsConstructor
@@ -47,6 +50,7 @@ public class DepartmentService {
     public Page<DepartmentResponse> findByCondition(DepartmentRequest departmentRequest, Pageable pageable) {
         Department department = departmentRequestMapper.toEntity(departmentRequest);
         //List<Department> entities2 = repository.findAllByName("test_3452273aee7b", pageable);
+
         Page<Department> entityPage = repository.findAll(pageable);
         Slice<Department> entityPage3 = repository.findAllByName("test_3452273aee7b", pageable);
         List<Department> entities = entityPage.getContent();
@@ -54,9 +58,31 @@ public class DepartmentService {
         return temp;
     }
 
-    public List<DepartmentResponse> findAllPage(Pageable pageable) {
+    public List<DepartmentResponse> findAllPage(Pageable pageable, String[] aStr) {
         Page<Department> entityPage = repository.findAll(pageable);
         List<Department> entities = entityPage.getContent();
+        List<String> data = new ArrayList<>();
+        String str = "";
+        // = {"a", "b", "c"};
+        int a = aStr.length;
+        if (a == 1) {
+            data.add(str);
+            data.add(str);
+            data.addAll(Arrays.asList(aStr));
+        }
+        if (a == 2) {
+            data.add(str);
+            data.addAll(Arrays.asList(aStr));
+        }
+        if (a == 3) {
+            data.addAll(Arrays.asList(aStr));
+        }
+        if (a > 3) {
+            data.add(str);
+            data.add(str);
+            data.addAll(Arrays.asList(aStr));
+        }
+
         return departmentResponseMapper.toDto(entities);
     }
 
@@ -76,7 +102,7 @@ public class DepartmentService {
 
     public List<DepartmentResponse> findAll() {
         List<Department> list = repository.findAll();
-        if (list.isEmpty())
+        if (CollectionUtils.isEmpty(list))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Không có phòng ban nào");
         return departmentResponseMapper.toDto(list);
     }
