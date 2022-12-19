@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
@@ -60,6 +61,8 @@ public class EmployeeService {
 
     public List<EmployeeResponse> findAll() {
         List<Employee> list = repository.findAll();
+
+        CollectionUtils.isEmpty(list);
         if (list.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Không có nhân viên nào");
         return employeeResponseMapper.toDto(list);

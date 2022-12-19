@@ -46,12 +46,12 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentResponsePage);
     }
 
-    @GetMapping("/find-all-page")
-    public ResponseEntity<List<DepartmentResponse>> findAllPage(@PageableDefault(sort = "id",
-            direction = Sort.Direction.DESC) Pageable pageable) {
-        List<DepartmentResponse> departmentResponsePage = departmentService.findAllPage(pageable);
-        return ResponseEntity.ok(departmentResponsePage);
-    }
+//    @GetMapping("/find-all-page")
+//    public ResponseEntity<List<DepartmentResponse>> findAllPage(@PageableDefault(sort = "id",
+//            direction = Sort.Direction.DESC) Pageable pageable) {
+//        //List<DepartmentResponse> departmentResponsePage = departmentService.findAllPage(pageable);
+//        return ResponseEntity.ok(departmentResponsePage);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@RequestBody @Validated DepartmentRequest departmentRequest, @PathVariable("id") Long id) {

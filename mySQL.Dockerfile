@@ -1,0 +1,2 @@
+ARG MYSQLTAG=latest
+FROM mysql:$MYSQLTAG

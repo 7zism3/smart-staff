@@ -1,0 +1,1 @@
+java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8080,suspend=n -jar SmartStaff-0.0.1-SNAPSHOT.jar
