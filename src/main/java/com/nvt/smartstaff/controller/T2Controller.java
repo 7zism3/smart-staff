@@ -21,4 +21,9 @@ public class T2Controller {
         return ResponseEntity.ok(roots);
     }
 
+    @GetMapping("/v2")
+    public ResponseEntity<Root [] > getRequest2() {
+        Root [] roots = t2Service.getRequest2();
+        return ResponseEntity.ok(roots);
+    }
 }

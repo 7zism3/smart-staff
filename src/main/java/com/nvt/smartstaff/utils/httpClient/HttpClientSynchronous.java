@@ -8,6 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
+// Đồng bộ
 public class HttpClientSynchronous {
 
     private static final HttpClient httpClient = HttpClient.newBuilder()
@@ -25,7 +26,7 @@ public class HttpClientSynchronous {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        // in tiêu đề phản hồi
+/*        // in tiêu đề phản hồi
         HttpHeaders headers = response.headers();
         headers.map().forEach((k, v) -> System.out.println(k + ":" + v));
 
@@ -33,7 +34,7 @@ public class HttpClientSynchronous {
         System.out.println(response.statusCode());
 
         // nội dung phản hồi in
-        System.out.println(response.body());
+        System.out.println(response.body());*/
 
         return response.body();
     }

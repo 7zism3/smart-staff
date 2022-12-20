@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.time.Duration;
 
+// Không đồng bộ
 public class HttpClientAsynchronous {
 
     private static final HttpClient httpClient = HttpClient.newBuilder()
@@ -26,9 +27,8 @@ public class HttpClientAsynchronous {
         CompletableFuture<HttpResponse<String>> response =
                 httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-        String result = response.thenApply(HttpResponse::body).get(5, TimeUnit.SECONDS);
+        String result = response.thenApply(HttpResponse::body).get(50, TimeUnit.SECONDS);
 
-        System.out.println(result);
         return result;
     }
 
