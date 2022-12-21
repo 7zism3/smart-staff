@@ -27,9 +27,8 @@ public class HttpClientAsynchronous {
         CompletableFuture<HttpResponse<String>> response =
                 httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-        String result = response.thenApply(HttpResponse::body).get(50, TimeUnit.SECONDS);
+        return response.thenApply(HttpResponse::body).get(50, TimeUnit.SECONDS);
 
-        return result;
     }
 
 }
